@@ -23,7 +23,7 @@ alpaca = tradeapi.REST(
 
 def retrieve_alpaca_dataframes(tickers):
     start = pd.Timestamp("2016-09-01", tz="America/New_York").isoformat()
-    end = pd.Timestamp("2020-08-21", tz="America/New_York").isoformat()
+    end = pd.Timestamp("2022-08-31", tz="America/New_York").isoformat()
 
     timeframe = "1Day"
 
