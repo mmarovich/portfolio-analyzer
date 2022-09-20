@@ -10,5 +10,5 @@ def stock_tickers_random():
         for each_symbol in csv_reader:
             random_stock_list_30.append(each_symbol[0])
     random_stock_list_30
-    random_stock_list_5 = random.choices(random_stock_list_30, k = 5)
+    random_stock_list_5 = random.sample(random_stock_list_30, k = 5)
     return random_stock_list_5
