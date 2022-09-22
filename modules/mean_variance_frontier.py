@@ -4,53 +4,61 @@
 import random
 import numpy as np
 import pandas as pd
-import seaborn as sns
+from matplotlib.axes._axes import _log as matplotlib_axes_logger
+matplotlib_axes_logger.setLevel('ERROR')
+
+
 
 def mean_variance_frontier(portfolio, tickers):
   random_tickers = random.sample(tickers, k=2)
   print(f"The two randomly selected tickers are: {random_tickers}")
-  ef_portfolio_returns_list = []
-  ef_portfolio_risk_list = []
-  average_returns_list = []
-  standard_deviation_returns_list = []
+  portfolio_returns_list = []
+  portfolio_risk_list = []
+  annualized_returns_list = []
+  annualized_std_list = []
   weights = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0]
   number_trading_days = 252
-  daily_returns_df = pd.DataFrame()
+  returns_df = pd.DataFrame()
 
   
   for random_ticker in random_tickers:
-      random_daily_returns_df = pd.DataFrame(portfolio.loc[:, (random_ticker, "daily_returns")])
-      average_returns = portfolio.loc[:, (random_ticker, "daily_returns")].mean() * number_trading_days
-      standard_deviation = (portfolio.loc[:, (random_ticker, "daily_returns")].std()) * np.sqrt(number_trading_days)
-      average_returns_list.append(average_returns)
-      standard_deviation_returns_list.append(standard_deviation)
-      daily_returns_df = pd.concat([daily_returns_df, random_daily_returns_df], axis=1)
+      random_df = pd.DataFrame(portfolio.loc[:, (random_ticker, "daily_returns")])
+      
+      annualized_returns = (portfolio.loc[:, (random_ticker, "daily_returns")].mean()) * number_trading_days
+      annualized_returns_list.append(annualized_returns)
+      
+      annualized_std = (portfolio.loc[:, (random_ticker, "daily_returns")].std()) * np.sqrt(number_trading_days)
+      annualized_std_list.append(annualized_std)
+            
+      returns_df = pd.concat([returns_df, random_df], axis=1)
       
 
-  correlation_matrix = daily_returns_df.corr()
-  display(correlation_matrix)
-  
+  correlation_matrix = returns_df.corr()
+  display(correlation_matrix)  
   
   
   for weight in weights:
     
-    portfolio_average = (weight*average_returns_list[0])**2 + ((1-weight)*average_returns_list[1])**2
-    ef_portfolio_returns_list.append(portfolio_average)
+    portfolio_returns = ((weight * annualized_returns_list[0])**2) + (((1-weight) * annualized_returns_list[1])**2)
+    portfolio_returns_list.append(portfolio_returns)
+    # Used formula to calculate portfolio return
     
-    
-    portfolio_risk = np.sqrt((weight*standard_deviation_returns_list[0])**2 + ((1-weight)*standard_deviation_returns_list[1])** + (2*weight*standard_deviation_returns_list[0]*(1-weight)*standard_deviation_returns_list[1]))
-    ef_portfolio_risk_list.append(portfolio_risk)
+    portfolio_risk = np.sqrt(((weight * annualized_std_list[0])**2) + (((1-weight) * annualized_std_list[1])**2) + (2 * weight * annualized_std_list[0] * (1-weight) * annualized_std_list[1]))
+    portfolio_risk_list.append(portfolio_risk)
+    # Used formula to calculate portfolio risk
   
 
   
-  ef_portfolio_returns_df = pd.DataFrame([ef_portfolio_returns_list,ef_portfolio_risk_list], index=["Portfolio Returns", "Portfolio Risk"])
+  mvf_df = pd.DataFrame([portfolio_returns_list, portfolio_risk_list], index=["Portfolio Returns", "Portfolio Risk"])
   
   cols_list = []
-  for each_run in range(1, 12):
-    cols_list.append("Execution "+str(each_run))
+  for each_execution in range(1, 12):
+    cols_list.append("Execution "+str(each_execution))
   
-  ef_portfolio_returns_df.columns = cols_list
-  ef_portfolio_returns_df = ef_portfolio_returns_df.T
-  ef_portfolio_returns_df.plot.scatter(x="Portfolio Risk", y="Portfolio Returns")
+  mvf_df.columns = cols_list
+  mvf_df = mvf_df.T
+  # Needed to call .T method to transpose data properly
+  
+  mvf_df.plot.scatter(x="Portfolio Risk", y="Portfolio Returns")
 
-  return ef_portfolio_returns_df
+  return mvf_df

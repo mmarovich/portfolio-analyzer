@@ -13,6 +13,8 @@ def sharpe_ratio(portfolio, tickers):
     sharpe_ratio_list.append(qs.stats.sharpe(ticker_daily_returns))
   
   sharpe_ratio_df = pd.DataFrame([ticker_list, sharpe_ratio_list]).T
+  # Needed to call .T method to transpose data properly
+
   cols = ["Stocks", "Sharpe Ratio"]
   sharpe_ratio_df.columns = cols
   sharpe_ratio_df.sort_values(by="Sharpe Ratio", inplace=True)

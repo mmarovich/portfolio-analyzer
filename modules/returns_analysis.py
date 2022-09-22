@@ -20,6 +20,7 @@ def returns_analysis(portfolio, tickers):
 def annualized_returns_analysis(portfolio, tickers):
   each_ticker = []
   ticker_annualized_returns = []
+  
   for ticker in tickers:
     each_ticker.append(ticker)
     daily_returns = portfolio.loc[:, (ticker, "daily_returns")]
@@ -28,6 +29,8 @@ def annualized_returns_analysis(portfolio, tickers):
     ticker_annualized_returns.append(annualized_daily_returns)
   
   annualized_returns_df = pd.DataFrame([each_ticker, ticker_annualized_returns]).T
+  # Needed to call .T method to transpose data properly
+  
   cols = ["Stocks", "Annualized Returns"]
   annualized_returns_df.columns = cols
   annualized_returns_df.sort_values(by="Annualized Returns", inplace=True)
