@@ -1,6 +1,6 @@
 # from MCForecastTools import MCSimulation
 
-def simulate_monte(simulation, dataframe):
+def simulate_monte(simulation, dataframe, tickers):
 
     #10 year Monte Carlo simulation to forecast 10 years cumulative returns
     MC_tenyear_rand = simulation(
