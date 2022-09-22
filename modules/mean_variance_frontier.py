@@ -71,6 +71,6 @@ def mean_variance_frontier(portfolio, tickers):
   # Needed to call .T method to transpose data properly
 
   
-  mvf_df.hvplot.scatter(x="Portfolio Risk", y="Portfolio Returns")
+  mvf_df.plot(kind="scatter", x="Portfolio Risk", y="Portfolio Returns")
 
   return mvf_df
