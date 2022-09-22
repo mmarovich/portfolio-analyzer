@@ -1,5 +1,4 @@
 import pandas as pd
-import hvplot.pandas
 import seaborn as sns
 number_trading_days = 252
 
