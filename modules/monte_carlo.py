@@ -1,5 +1,9 @@
 # from MCForecastTools import MCSimulation
 
+# Gets rid of annoying sim warnings
+import warnings
+warnings.filterwarnings('ignore')
+
 def simulate_monte(simulation, dataframe, tickers):
 
     #10 year Monte Carlo simulation to forecast 10 years cumulative returns
