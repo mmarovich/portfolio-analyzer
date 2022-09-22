@@ -4,6 +4,7 @@ import pandas as pd
 def beta(portfolio, tickers, sp500_df):
     beta_list = []
     ticker_list = []
+    
     for ticker in tickers:
         covariance_asset_market = portfolio.loc[:, (ticker, "daily_returns")].cov(sp500_df.loc[:, "daily_returns"])
         variance_market = sp500_df.loc[:, "daily_returns"].var()
