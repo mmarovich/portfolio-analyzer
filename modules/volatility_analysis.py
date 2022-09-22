@@ -6,6 +6,7 @@ number_trading_days = 252
 def volatility_analysis(portfolio, tickers):
   each_ticker_volatility = []
   each_ticker = []
+  
   for ticker in tickers:
     each_ticker.append(ticker)
     daily_returns = portfolio.loc[:, (ticker, "daily_returns")]
