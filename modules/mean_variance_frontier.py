@@ -21,7 +21,7 @@ def mean_variance_frontier(portfolio, tickers):
   for random_ticker in random_tickers:
       random_daily_returns_df = pd.DataFrame(portfolio.loc[:, (random_ticker, "daily_returns")])
       average_returns = portfolio.loc[:, (random_ticker, "daily_returns")].mean() * number_trading_days
-      standard_deviation = (portfolio.loc[:, (random_ticker, "daily_returns")].std()) * np.sqrt(number_trading_days)
+      annualized_standard_deviation = (portfolio.loc[:, (random_ticker, "daily_returns")].std()) * np.sqrt(number_trading_days)
       average_returns_list.append(average_returns)
       standard_deviation_returns_list.append(standard_deviation)
       daily_returns_df = pd.concat([daily_returns_df, random_daily_returns_df], axis=1)
