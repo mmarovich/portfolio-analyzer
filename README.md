@@ -1,11 +1,15 @@
-# Project Title
+Portfolio Analyzer
 
-Description
+This portfolio analyzer uses the Alpaca API, python, and various packages to create analysis for 10 selected stocks, including annualized returns, beta, sharpe ratios, and Monte Carlo simulations.
 
 ---
 
 ## Technologies
 
+* Python and Jupyter Lab
+* [Alpaca API](https://alpaca.markets/)
+* [Seaborn](https://seaborn.pydata.org/)
+* [QuantStats](https://openbase.com/python/QuantStats/documentation)
 
 
 ---
@@ -41,10 +45,13 @@ Lastly, we obtained the beta for each asset. This provided us with the sensitivi
 
 ## Contributors
 
-In this section, list all the people who contribute to this project. You might want recruiters or potential collaborators to reach you, so include your contact email and, optionally, your LinkedIn or Twitter profile.
+Aanchal Khanna
+Maxwell Marovich
+Nick Schulz
+Zachary Butler
 
 ---
 
 ## License
 
-When you share a project on a repository, especially a public one, it's important to choose the right license to specify what others can and can't with your source code and files. Use this section to include the license you want to use.
+MIT
