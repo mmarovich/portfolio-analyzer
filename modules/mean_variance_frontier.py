@@ -4,7 +4,6 @@
 import random
 import numpy as np
 import pandas as pd
-import hvplot.pandas
 from matplotlib.axes._axes import _log as matplotlib_axes_logger
 matplotlib_axes_logger.setLevel('ERROR')
 

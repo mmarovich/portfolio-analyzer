@@ -1,4 +1,4 @@
-Portfolio Analyzer
+# Portfolio Analyzer
 
 This portfolio analyzer uses the Alpaca API, python, and various packages to create analysis for 10 selected stocks, including annualized returns, beta, sharpe ratios, and Monte Carlo simulations.
 
