@@ -17,4 +17,4 @@ def volatility_analysis(portfolio, tickers):
   volatility_df.columns=cols
   volatility_df.sort_values(by="Volatility", inplace=True)
   sns.barplot(data=volatility_df, x="Stocks", y="Volatility", palette="flare")
-  return(volatility_df)
+  display(volatility_df)
